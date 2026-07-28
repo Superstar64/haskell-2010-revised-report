@@ -1,0 +1,67 @@
+cabal-version:      3.4
+name:               haskell2010-base
+version:            0.1.0.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             David Binder
+maintainer:         D.Binder@kent.ac.uk
+category:           Language
+build-type:         Simple
+extra-doc-files:
+  CHANGELOG.md
+  README.md
+
+library
+    exposed-modules:
+      Control.Monad
+      Data.Array
+      Data.Bits
+      Data.Char
+      Data.Complex
+      Data.Int
+      Data.Ix
+      Data.List
+      Data.Maybe
+      Data.Ratio
+      Data.Word
+      Foreign
+      Foreign.C
+      Foreign.C.Error
+      Foreign.C.String
+      Foreign.C.Types
+      Foreign.ForeignPtr
+      Foreign.Marshal
+      Foreign.Marshal.Alloc
+      Foreign.Marshal.Array
+      Foreign.Marshal.Error
+      Foreign.Marshal.Utils
+      Foreign.Ptr
+      Foreign.StablePtr
+      Foreign.Storable
+      Numeric
+      Prelude
+      System.Environment
+      System.Exit
+      System.IO
+      System.IO.Error
+    other-modules:
+      PreludeList
+      PreludeText
+      PreludeIO
+      Prim
+      NumHierarchy
+      Data.Bool
+      Data.String
+      Data.Eq
+      Data.Ord
+      Data.Enum
+      Data.Function
+      Data.Tuple
+      Data.Either
+      Text.Read
+      Text.Show
+    default-extensions: NoImplicitPrelude
+    ghc-options: -Wno-missing-methods
+    build-depends:
+    hs-source-dirs:   src
+    default-language: Haskell2010
