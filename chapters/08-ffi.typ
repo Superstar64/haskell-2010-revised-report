@@ -1,3 +1,5 @@
+#import "../macros.typ" : *
+
 The Foreign Function Interface (FFI) has two purposes: it enables (1) to
 describe in Haskell the interface to foreign language functionality and
 (2) to use from foreign code Haskell routines.  More generally, its aim
@@ -89,12 +91,15 @@ system-specific calling conventions whose name is not explicitly listed here.
 
 To refer to objects of an external C context, we introduce the following
 phrases:
-$
-  italic("chname") &-> {italic("chchar")} mono(".h") &text("(C header filename)")\
-  italic("cid") &-> italic("letter") {italic("letter") | italic("ascDigit")} &text("(C identifier)")\
-  italic("chchar") &-> italic("letter") | italic("ascSymbol")_(chevron.l mono("&") chevron.r)\
-  italic("letter") &-> italic("ascSmall") | italic("ascLarge") | mono("_")
-$
+#table(
+  columns: 4,
+  align: (left, center, left, left),
+  stroke: none,
+  $italic("chname")$,$->$, ${italic("chchar")} terminal(".h")$, [(C header filename)],
+  $italic("cid")$, $->$, $italic("letter") {italic("letter") | nonterminal("ascDigit")}$, [(C identifier)],
+  $italic("chchar")$,$->$,$italic("letter") | nonterminal("ascSymbol")_(chevron.l mono("&") chevron.r)$, [],
+  $italic("letter")$, $->$, $nonterminal("ascSmall") | nonterminal("ascLarge") | terminal("_")$,[]
+)
 
 The range of lexemes that are admissible for $italic("chname")$ is a subset of
 those permitted as arguments to the `#include` directive in C.  In
@@ -105,17 +110,21 @@ as specified in~@Kernighan1988.
 == Foreign Declarations
 
 The syntax of foreign declarations is as follows:
-$
-  italic("topdecl") &-> mono("foreign") italic("fdecl")\
-  italic("fdecl") &-> mono("import") italic("callconv") [italic("safety")] italic("impent") italic("var") mono("::") italic("ftype") &text("(define variable)")\
-  &| mono("export") italic("callconv") italic("expent") italic("var") mono("::") italic("ftype") &text("(expose variable)") \
-  italic("callconv") &-> mono("ccall") | mono("stdcall") | mono("cplusplus") & text("(calling convention)")\
-  &| mono("jvm") | mono("dotnet") \
-  &| bold("system-specific calling conventions") \
-  italic("impent") &-> [italic("string")]\
-  italic("expent") &-> [italic("string")]\
-  italic("safety") &-> mono("unsafe") | mono("safe")
-$
+
+#table(
+  columns: 4,
+  align: (left, center, left, left),
+  stroke: none,
+  $italic("topdecl")$, $->$,$terminal("foreign") nonterminal("fdecl")$,[],
+  $italic("fdecl")$, $->$, $terminal("import") nonterminal("callconv") [nonterminal("safety")] nonterminal("impent") nonterminal("var") terminal("::") nonterminal("ftype")$, [(define variable)],
+  $$, $|$,$terminal("export") nonterminal("callconv") nonterminal("expent") nonterminal("var") terminal("::") nonterminal("ftype")$,[(expose variable)"],
+  $italic("callconv")$, $->$,$terminal("ccall") | terminal("stdcall") | terminal("cplusplus")$,[(calling convention)],
+  $$, $|$,$terminal("jvm") | terminal("dotnet")$,[],
+  $$, $|$,$bold("system-specific calling conventions")$,[],
+  $italic("impent")$, $->$,$[nonterminal("string")]$, [],
+  $italic("expent")$, $->$, $[nonterminal("string")]$, [],
+  $italic("safety")$, $->$,$terminal("unsafe") | terminal("safe")$, []
+)
 
 There are two flavours of foreign declarations: import and export
 declarations.  An import declaration makes an _external entity,_ i.e., a
@@ -210,13 +219,17 @@ between the Haskell and the external context as function arguments and
 results.
 
 Foreign types are produced according to the following grammar:
-$
-  italic("ftype") &-> italic("frtype") \
-  &| italic("fatype") mono("->") italic("ftype") \
-  italic("frtype") &-> italic("fatype") \
-  & | mono("()") \
-  italic("fatype") &-> italic("qtycon") italic("atype")_1 dots italic("atype")_k & (k >= 0)
-$
+#table(
+  columns: 4,
+  align: (left, center, left, left),
+  stroke: none,
+  $italic("ftype")$, $->$, $nonterminal("frtype")$, [],
+  $$, $|$, $nonterminal("fatype") terminal("->") nonterminal("ftype")$,[],
+  $italic("frtype")$, $->$, $nonterminal("fatype")$, [],
+  $$, $|$,$terminal("()")$,[],
+  $italic("fatype")$, $->$, $nonterminal("qtycon") nonterminal("atype")_1 dots nonterminal("atype")_k$, $(k >= 0)$,
+)
+
 
 A foreign type is the Haskell type of an external entity.  Only a subset of
 Haskell's types are permissible as foreign types, as only a restricted set of

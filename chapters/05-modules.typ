@@ -86,19 +86,19 @@ set of standard library modules that may be imported as required
 
 A module defines a mutually
 recursive scope containing declarations for value bindings, data
-types, type synonyms, classes, etc. (see @chapter:declarations[Chapter]).
+types, type synonyms, classes, etc. (see @chapter:declarations).
 
 #table(
   columns: 4,
   align: (left, center, left, left),
   stroke: none,
-  $italic("module")$, $->$, $terminal("module") nonterminal("modid") [ italic("exports")] terminal("where") italic("body")$,$$,
-  $$, $|$, $italic("body")$, $$,
-  $italic("body")$, $->$, $terminal("{") italic("impdecls") terminal(";") italic("topdecls") terminal("}")$, $$,
-  $$, $|$, $terminal("{") italic("impdecls") terminal("}")$, $$,
-  $$, $|$, $terminal("{") italic("topdecls") terminal("}")$, $$,
-  $italic("impdecls")$, $->$, $italic("impdecl")_1 terminal(";") dots terminal(";") italic("impdecl")_n$, $(n >= 1)$,
-  $italic("topdecls")$, $->$, $italic("topdecl")_1 terminal(";") dots terminal(";") italic("topdecl")_n$, $(n >= 1)$,
+  $italic("module")$, $->$, $terminal("module") nonterminal("modid") [ nonterminal("exports")] terminal("where") nonterminal("body")$,$$,
+  $$, $|$, $nonterminal("body")$, $$,
+  $nonterminal("body")$, $->$, $terminal("{") nonterminal("impdecls") terminal(";") nonterminal("topdecls") terminal("}")$, $$,
+  $$, $|$, $terminal("{") nonterminal("impdecls") terminal("}")$, $$,
+  $$, $|$, $terminal("{") nonterminal("topdecls") terminal("}")$, $$,
+  $italic("impdecls")$, $->$, $nonterminal("impdecl")_1 terminal(";") dots terminal(";") nonterminal("impdecl")_n$, $(n >= 1)$,
+  $italic("topdecls")$, $->$, $nonterminal("topdecl")_1 terminal(";") dots terminal(";") nonterminal("topdecl")_n$, $(n >= 1)$,
 )
 
 A module begins with a header: the keyword
@@ -106,7 +106,7 @@ A module begins with a header: the keyword
 parentheses) to be exported.  The header is followed by a possibly-empty
 list of `import` declarations ($italic("impdecls")$, Section~\ref{import}) that specify modules to be imported,
 optionally restricting the imported bindings.  
-This is followed by a possibly-empty list of top-level declarations ($italic("topdecls")$, @chapter:declarations[Chapter]).
+This is followed by a possibly-empty list of top-level declarations ($italic("topdecls")$, @chapter:declarations).
 
 An abbreviated form of module, consisting only 
 of the module body, is permitted.  If this is used, the header is assumed to be `module Main(main) where`.
@@ -118,12 +118,12 @@ If the first lexeme in the abbreviated module is not a `{`, then the layout rule
   columns: 4,
   align: (left, center, left, left),
   stroke: none,
-  $italic("exports")$, $->$, $terminal("(") italic("export")_1 terminal(",") dots terminal(",") italic("export")_n [terminal(",")]terminal(")")$, $(n >= 0)$,
-  $italic("export")$, $->$, $italic("qvar")$, $$,
-  $$, $|$, $italic("qtycon") [ terminal("(..)") | terminal("(") italic("cname")_1 terminal(",") dots terminal(",") italic("cname")_n terminal(")")]$, $(n >= 0)$,
-  $$, $|$, $italic("qtycls") [ terminal("(..)") | terminal("(") italic("var")_1 terminal(",") dots terminal(",") italic("var")_n terminal(")")]$, $(n >= 0)$,
+  $italic("exports")$, $->$, $terminal("(") nonterminal("export")_1 terminal(",") dots terminal(",") nonterminal("export")_n [terminal(",")]terminal(")")$, $(n >= 0)$,
+  $italic("export")$, $->$, $nonterminal("qvar")$, $$,
+  $$, $|$, $nonterminal("qtycon") [ terminal("(..)") | terminal("(") nonterminal("cname")_1 terminal(",") dots terminal(",") nonterminal("cname")_n terminal(")")]$, $(n >= 0)$,
+  $$, $|$, $nonterminal("qtycls") [ terminal("(..)") | terminal("(") nonterminal("var")_1 terminal(",") dots terminal(",") nonterminal("var")_n terminal(")")]$, $(n >= 0)$,
   $$, $|$, $terminal("module") nonterminal("modid")$, $$,
-  $italic("cname")$, $->$, $ italic("var") | italic("con")$, $$,
+  $italic("cname")$, $->$, $nonterminal("var") | nonterminal("con")$, $$,
 )
 
 An _export list_ identifies the entities to be exported by a
@@ -231,14 +231,14 @@ can import each other recursively), and between `module B` and `C.f`
   columns: 4,
   align: (left, center, left, left),
   stroke: none,
-  $italic("impdecl")$, $->$, $terminal("import") [terminal("qualified")] nonterminal("modid") [terminal("as") nonterminal("modid")] [italic("impspec")]$, $$,
+  $italic("impdecl")$, $->$, $terminal("import") [terminal("qualified")] nonterminal("modid") [terminal("as") nonterminal("modid")] [nonterminal("impspec")]$, $$,
   $$, $|$, $$, [(empty declaration)],
-  $italic("impspec")$, $->$, $terminal("(") italic("import")_1 terminal(",") dots terminal(",") italic("import")_n [terminal(",")] terminal(")")$, $(n >= 0)$,
-  $$, $|$, $terminal("hiding") terminal("(") italic("import")_1 terminal(",") dots terminal(",") italic("import")_n [terminal(",")] terminal(")")$, $(n >= 0)$,
-  $italic("import")$, $->$, $italic("var")$, $$,
-  $$, $|$, $italic("tycon") [ terminal("(..)") | terminal("(") italic("cname")_1 terminal(",") dots terminal(",") italic("cname")_n terminal(")")]$, $(n >= 0)$,
-  $$, $|$, $italic("tycls") [ terminal("(..)") | terminal("(") italic("var")_1 terminal(",") dots terminal(",") italic("var")_n terminal(")")]$, $(n >= 0)$,
-  $italic("cname")$, $->$, $italic("var") | italic("con")$, $$,
+  $italic("impspec")$, $->$, $terminal("(") nonterminal("import")_1 terminal(",") dots terminal(",") nonterminal("import")_n [terminal(",")] terminal(")")$, $(n >= 0)$,
+  $$, $|$, $terminal("hiding") terminal("(") nonterminal("import")_1 terminal(",") dots terminal(",") nonterminal("import")_n [terminal(",")] terminal(")")$, $(n >= 0)$,
+  $italic("import")$, $->$, $nonterminal("var")$, $$,
+  $$, $|$, $nonterminal("tycon") [ terminal("(..)") | terminal("(") nonterminal("cname")_1 terminal(",") dots terminal(",") nonterminal("cname")_n terminal(")")]$, $(n >= 0)$,
+  $$, $|$, $nonterminal("tycls") [ terminal("(..)") | terminal("(") nonterminal("var")_1 terminal(",") dots terminal(",") nonterminal("var")_n terminal(")")]$, $(n >= 0)$,
+  $italic("cname")$, $->$, $nonterminal("var") | nonterminal("con")$, $$,
 )
 
 The entities exported by a module may be brought into scope in
