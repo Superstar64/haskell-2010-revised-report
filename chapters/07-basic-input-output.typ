@@ -170,7 +170,7 @@ getLine = do c <- getChar
                                   return (c:s)
 ```
 
-== Exception Handling in the I/O Monad
+== Exception Handling in the I/O Monad <sec:io-exceptions>
 
 The I/O monad includes a simple exception handling system.  Any I/O
 operation may raise an exception instead of returning a result.

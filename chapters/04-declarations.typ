@@ -1406,7 +1406,7 @@ identical up to renaming of the type variables.
 
 === Context Reduction Errors
 
-As mentioned in Section~\ref{type-semantics}, the context of a type
+As mentioned in @sec:type-semantics, the context of a type
 may constrain only a type variable, or the application of a type variable
 to one or more types.  Hence, types produced by
 generalization must be expressed in a form in which all context
@@ -1442,7 +1442,7 @@ therefore `(Monad m, Eq (m a)) => a -> m a -> Bool`, and the context
 cannot be simplified further.
 
 The instance declaration derived from a data type `deriving` clause
-(see Section~\ref{derived-decls})
+(see @sec:derived-decls)
 must, like any instance declaration, have a _simple_ context; that is,
 all the constraints must be of the form $C space a$, where $a$ is a type variable.
 For example, in the type
@@ -1496,7 +1496,7 @@ variables.  For example, we cannot write
         in ...
 ```
 because that would claim that `g` was polymorphic in both `a` and `b`
-(Section~\ref{type-signatures}).  In this program, `g` can only be given
+(@sec:type-signatures).  In this program, `g` can only be given
 a type signature if its first argument is restricted to a type not involving
 type variables; for example
 ```haskell
@@ -1504,7 +1504,7 @@ type variables; for example
 ```
 This signature would also cause `x` to have type `Int`.
 
-=== The Monomorphism Restriction
+=== The Monomorphism Restriction <sec:monomorphism-restriction>
 
 Haskell places certain extra restrictions on the generalization
 step, beyond the standard Hindley-Milner restriction described above,
@@ -1651,7 +1651,7 @@ program.
 The first step in the kind inference process is to arrange the set of
 datatype, synonym, and class definitions into dependency groups.  This can
 be achieved in much the same way as the dependency analysis for value
-declarations that was described in Section~\ref{dependencyanalysis}.
+declarations that was described in @sec:dependencyanalysis.
 For example, the following program fragment includes the definition
 of a datatype constructor `D`, a synonym `S` and a class `C`, all of
 which would be included in the same dependency group:

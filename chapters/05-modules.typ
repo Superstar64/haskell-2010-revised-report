@@ -1,7 +1,7 @@
 #import "../macros.typ" : *
 
 A module defines a collection of values, datatypes, type synonyms,
-classes, etc.~(see @chapter:declarations[Chapter]), in an environment created
+classes, etc.~(see @chapter:declarations), in an environment created
 by a set of _imports_ (resources brought into scope from other modules).
 It _exports_ some of these resources, making them available to
 other modules.  
@@ -14,7 +14,7 @@ which, by convention, must be called `Main` and must
 export the value `main`.  The _value_ of the program
 is the value of the identifier `main` in module `Main`,
 which must be a computation of type $mono("IO") tau$ for some type $tau$
-(see @chapter:basic-input-output[Chapter]).  When the program is executed, the computation
+(see @chapter:basic-input-output).  When the program is executed, the computation
 `main` is performed, and its result (of type $tau$) is discarded.
 
 Modules may reference other modules via explicit
@@ -27,8 +27,8 @@ A multi-module Haskell program can be converted into a single-module
 program by giving each entity a unique name, changing all occurrences
 to refer to the appropriate unique name, and then concatenating all the module
 bodies#footnote[There are two minor exceptions to this statement.
-First, `default` declarations scope over a single module (Section~\ref{default-decls}).
-Second, Rule 2 of the monomorphism restriction (Section~\ref{sect:monomorphism-restriction})
+First, `default` declarations scope over a single module (@sec:default-decls).
+Second, Rule 2 of the monomorphism restriction (@sec:monomorphism-restriction)
 is affected by module boundaries.
 ].  
 For example, here is a three-module program:
@@ -78,9 +78,8 @@ and not part of the language definition; in this report a $italic("modid")$ is
 treated as a single identifier occupying a flat namespace.
 
 There is one distinguished module, `Prelude`, which is imported into
-all modules by default (see Section~\ref{standard-prelude}), plus a
-set of standard library modules that may be imported as required
-(see Part~\ref{libraries}).
+all modules by default (see @chapter:standard-prelude), plus a
+set of standard library modules that may be imported as required.
 
 == Module Structure
 
@@ -104,7 +103,7 @@ types, type synonyms, classes, etc. (see @chapter:declarations).
 A module begins with a header: the keyword
 `module`, the module name, and a list of entities (enclosed in round
 parentheses) to be exported.  The header is followed by a possibly-empty
-list of `import` declarations ($italic("impdecls")$, Section~\ref{import}) that specify modules to be imported,
+list of `import` declarations ($italic("impdecls")$, @sec:import) that specify modules to be imported,
 optionally restricting the imported bindings.  
 This is followed by a possibly-empty list of top-level declarations ($italic("topdecls")$, @chapter:declarations).
 
@@ -144,7 +143,7 @@ Entities in an export list may be named as follows:
    three ways: 
    - The form $T$ names the type _but not the constructors or field names_.
      The ability to export a type without its constructors allows the
-     construction of abstract datatypes (see Section~\ref{abstract-types}).
+     construction of abstract datatypes (see @sec:abstract-types).
    - The form $T(c_1, dots ,c_n)$, names the type and some or all of its constructors and field names.  
    - The abbreviated form $T(..)$ names the type 
      and all its constructors and field names that are currently in scope
@@ -188,7 +187,7 @@ Entities in an export list may be named as follows:
 
    A module can name its own local definitions in its export
    list using its own name in the "`module M`" syntax, because a local
-   declaration brings into scope both a qualified and unqualified name (Section~\ref{qualifiers}). 
+   declaration brings into scope both a qualified and unqualified name (@sec:qualifiers). 
    For example:
    ```haskell
    module Mod1( module Mod1, module Mod2 ) where
@@ -225,7 +224,7 @@ but there are name clashes in the export list between `C.g` and `g`
 can import each other recursively), and between `module B` and `C.f`
 (assuming `B.f` and `C.f` are different entities).
 
-== Import Declarations
+== Import Declarations <sec:import>
 
 #table(
   columns: 4,
@@ -263,7 +262,7 @@ Lexically, the terminal symbols "`as`", "`qualified`" and
 special significance only in the context of an `import` declaration;
 they may also be used as variables.
 
-=== What is imported
+=== What is imported <sec:what-is-imported>
 
 Exactly which entities are to be imported can be specified in one
 of the following three ways:
@@ -302,15 +301,15 @@ of the following three ways:
 
 === Qualified import
 
-For each entity imported under the rules of Section~\ref{whatisimported},
+For each entity imported under the rules of @sec:what-is-imported,
 the top-level environment is extended.  If the import declaration used
 the `qualified` keyword, only the _qualified name_ of the entity is
 brought into scope.  If the `qualified` keyword is omitted, then _both_ the
 qualified _and_ unqualified name of the entity is brought into scope.
-Section~\ref{qualifiers} describes qualified names in more detail.
+@sec:qualifiers describes qualified names in more detail.
 
 The qualifier on the imported name is either the name of the imported module,
-or the local alias given in the `as` clause (Section~\ref{as-clause}) 
+or the local alias given in the `as` clause (@sec:as-clause) 
 on the `import` statement.
 Hence, _the qualifier is not necessarily the name of the module in which the
 entity was originally declared_.
@@ -329,7 +328,7 @@ l1 * l2 = nub (l1 + l2)     -- This * differs from the one in the Prelude
 succ = (Prelude.+ 1)
 ```
 
-=== Local aliases
+=== Local aliases <sec:as-clause>
 
 Imported modules may be assigned a local alias in the importing module
 using the `as` clause.
@@ -390,9 +389,9 @@ Then this table shows what names are brought into scope by the specified import 
 ]
 
 In all cases, all instance declarations in scope in module `A` are imported
-(Section~\ref{import-instances}).
+(@sec:import-instances).
 
-== Importing and Exporting Instance Declarations
+== Importing and Exporting Instance Declarations <sec:import-instances>
 
 Instance declarations cannot be explicitly named on import or export
 lists.  All instances in scope within a module are _always_
@@ -414,9 +413,9 @@ instance Show (IO a) where
 ```
 
 == Name Clashes and Closure
-=== Qualified names
+=== Qualified names <sec:qualifiers>
 
-A _qualified name_ is written as $italic("modid").italic("name")$ (Section~\ref{ids}).
+A _qualified name_ is written as $italic("modid").italic("name")$ (@sec:ids).
 A qualified name is brought into scope:
 
 - _By a top level declaration._
@@ -435,7 +434,7 @@ A qualified name is brought into scope:
   g x = let M.y = x+1 in ...  -- ILLEGAL
   ```
 - _By an `import` declaration._  An `import` declaration, whether `qualified` or not,
-  always brings into scope the qualified name of the imported entity (Section~\ref{import}).
+  always brings into scope the qualified name of the imported entity (@sec:import).
   This allows a qualified
   import to be replaced with an unqualified one without forcing changes
   in the references to the imported names.  
@@ -489,7 +488,7 @@ Consider the definition of `tup`.
 The name occurring in a type signature or fixity declarations is
 always unqualified, and unambiguously refers to another declaration in
 the same declaration list (except that the fixity declaration for a
-class method can occur at top level --- Section~\ref{fixity}). For example,
+class method can occur at top level --- @sec:fixity-declarations). For example,
 the following module is legal:
 ```haskell
 module F where
@@ -563,7 +562,7 @@ many predefined library modules, which provide less frequently used
 functions and types.  For example, complex numbers, arrays, 
 and most of the input/output are all part of the standard
 libraries.
-These are defined in Part~\ref{libraries}.
+// These are defined in Part~\ref{libraries}.
 Separating libraries from the Prelude has the advantage of reducing the size and complexity of the Prelude, allowing it to be more easily assimilated,
 and increasing the space of useful names available to the programmer.
 
@@ -584,16 +583,16 @@ just like those from any other module.
 
 The semantics of the entities in `Prelude` is specified by a reference
 implementation of `Prelude` written in Haskell, given in
-Chapter~\ref{stdprelude}.  Some datatypes (such as `Int`) and
+@chapter:standard-prelude.  Some datatypes (such as `Int`) and
 functions (such as `Int` addition) cannot be specified directly in
 Haskell.  Since the treatment of such entities depends on the
-implementation, they are not formally defined in Chapter~\ref{stdprelude}.
+implementation, they are not formally defined in @chapter:standard-prelude.
 The implementation of
 `Prelude` is also incomplete in its treatment of tuples: there should
 be an infinite family of tuples and their instance declarations, but the
 implementation only gives a scheme.
 
-Chapter~\ref{stdprelude} defines the module `Prelude` using
+@chapter:standard-prelude defines the module `Prelude` using
 several other modules: `PreludeList`, `PreludeIO`, and so on.
 These modules are _not_ part of Haskell, and they cannot be imported
 separately.  They are simply 

@@ -140,7 +140,7 @@ would generate the following `Bounded` instance:
     maxBound = Pair maxBound maxBound
 ```
 
-== Derived instances of Read and Show
+== Derived instances of Read and Show <sec:derived-text>
 
 The class methods automatically introduced by derived instances
 of `Read` and `Show` are `showsPrec`,
@@ -182,7 +182,7 @@ using non-standard denotations.  This is especially useful for strings
 
 `readsPrec` will parse any valid representation of the standard types
 apart from strings, for which only quoted strings are accepted, and other lists,
-for which only the bracketed form `[...]` is accepted. See @chapter:standard-prelude[Chapter] for full details.
+for which only the bracketed form `[...]` is accepted. See @chapter:standard-prelude for full details.
 
 The result of `show` is a syntactically correct Haskell expression
 containing only constants, given the fixity declarations in force at

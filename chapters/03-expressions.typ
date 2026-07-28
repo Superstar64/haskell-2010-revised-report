@@ -674,7 +674,7 @@ However, the phrase `Bool -> a` is syntactically valid as a type, and parsers wi
 Programmers are advised, therefore, to avoid guards that
 end with a type signature --- indeed that is why a $italic("guard")$ contains an $italic("infixexp")$ not an $italic("exp")$.
 
-== Do Expressions
+== Do Expressions <sec:do-expressions>
 
 #table(
   columns: 4,

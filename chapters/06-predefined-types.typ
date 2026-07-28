@@ -5,7 +5,7 @@ and functions that are implicitly imported into every Haskell
 program.  In this chapter, we describe the types and classes found in
 the Prelude.
 Most functions are not described in detail here as they
-can easily be understood from their definitions as given in @chapter:standard-prelude[Chapter]
+can easily be understood from their definitions as given in @chapter:standard-prelude.
 Other predefined types such as arrays, complex numbers, and rationals
 are defined in part:libraries[Part]
 
@@ -24,7 +24,7 @@ data  Bool  =  False | True deriving
                              (Read, Show, Eq, Ord, Enum, Bounded)
 ```
 
-The boolean type \mbox{\tt Bool} is an enumeration.
+The boolean type `Bool` is an enumeration.
 The basic boolean functions are `&&` (and), `||` (or), and `not`.
 The name `otherwise` is defined as `True` to make guarded expressions
 more readable.
@@ -33,7 +33,7 @@ more readable.
 
 The character type `Char` is an enumeration whose values represent Unicode characters @Unicode.
 The lexical syntax for
-characters is defined in Section~\ref{lexemes-char}; character
+characters is defined in @sec:lexemes-char; character
 literals are nullary constructors in the datatype `Char`.  Type `Char`
 is an instance of the classes `Read`, `Show`, `Eq`, `Ord`, `Enum`, and `Bounded`.
 The `toEnum` and `fromEnum` functions,
@@ -52,7 +52,7 @@ type  String  =  [Char]
 ```
 
 Strings may be abbreviated using the lexical syntax described in
-Section~\ref{lexemes-char}.  For example, `"A string"` abbreviates
+@sec:lexemes-char.  For example, `"A string"` abbreviates
 ```haskell
 ['A', ' ', 's', 't', 'r', 'i', 'n', 'g']
 ```
@@ -64,23 +64,23 @@ data  [a]  =  [] | a : [a]  deriving (Eq, Ord)
 ```
 
 Lists are an algebraic datatype of two constructors, although
-with special syntax, as described in Section~\ref{lists}.
+with special syntax, as described in @sec:lists.
 The first constructor is the null list, written `'[]'` ("nil"),
 and the second is `':'` ("cons").
-The module `PreludeList` (see Section~\ref{preludelist})
+The module `PreludeList` (see @sec:preludelist)
 defines many standard list functions.
 Arithmetic sequences
 and list comprehensions,
 two convenient
 syntaxes for special kinds of lists, are described in
-Sections~\ref{arithmetic-sequences} and \ref{list-comprehensions},
+@sec:arithmetic-sequences and @sec:list-comprehensions,
 respectively.
 Lists are an instance of classes `Read`, `Show`, `Eq`, `Ord`, `Monad`, `Functor`, and `MonadPlus`.
 
 === Tuples <subsec:basic-tuples>
 
 Tuples are algebraic datatypes with special syntax, as defined
-in Section~\ref{tuples}.  Each tuple type has a single constructor.
+in @sec:tuple-expression.  Each tuple type has a single constructor.
 All tuples are instances of `Eq`, `Ord`, `Bounded`, `Read`,
 and `Show` (provided, of course, that all their component types are).
 
@@ -107,7 +107,7 @@ The following functions are defined for pairs (2-tuples):
 data  () = () deriving (Eq, Ord, Bounded, Enum, Read, Show)
 ```
 
-The unit datatype `()` has one non-$bot$ member, the nullary constructor `()`.  See also Section~\ref{unit-expression}.
+The unit datatype `()` has one non-$bot$ member, the nullary constructor `()`.  See also @sec:unit-expression.
 
 === Function Types
 
@@ -120,13 +120,13 @@ functional values.  The following simple functions are found in the Prelude:
 The `IO` type serves as a tag for operations (actions) that interact
 with the outside world.  The `IO` type is abstract: no constructors are
 visible to the user.  `IO` is an instance of the `Monad` and `Functor`
-classes.  @chapter:basic-input-output[Chapter] describes I/O operations.
+classes.  @chapter:basic-input-output describes I/O operations.
 
 `IOError` is an abstract type representing errors raised by I/O
 operations.  It is an instance of `Show` and `Eq`.  Values of this type
 are constructed by the various I/O functions and are not presented in
 any further detail in this report.  The Prelude contains a few
-I/O functions (defined in Section~\ref{preludeio}), and part:libraries[Part]
+I/O functions (defined in @sec:preludeio), and part:libraries[Part]
 contains many more.
 
 === Other Types
@@ -158,7 +158,7 @@ $
 
 `seq` is usually introduced to improve performance by
 avoiding unneeded laziness.  Strict datatypes (see
-Section~\ref{strictness-flags}) are defined in terms of the `$!` operator.
+@sec:datatype-decls) are defined in terms of the `$!` operator.
 However, the provision of `seq` has important semantic consequences, because it is available
 _at every type_.
 As a consequence, $bot$ is
@@ -379,7 +379,7 @@ class  Show a  where
 The `Read` and `Show` classes are used to convert values to
 or from strings.
 The `Int` argument to `showsPrec` and `readsPrec` gives the operator
-precedence of the enclosing context (see Section~\ref{derived-text}).
+precedence of the enclosing context (see @sec:derived-text).
 
 `showsPrec` and `showList` return a `String`-to-`String`
 function, to allow constant-time concatenation of its results using function
@@ -447,10 +447,10 @@ respectively, of a value.
 The functions `fromEnum` and `toEnum` map values from a type in
 `Enum` to and from `Int`.
 The `enumFrom`... methods are used when translating arithmetic
-sequences (Section~\ref{arithmetic-sequences}).
+sequences (@sec:arithmetic-sequences).
 
 Instances of `Enum` may be derived for any enumeration type (types
-whose constructors have no fields); see Chapter~\ref{derived-appendix}.
+whose constructors have no fields); see @chapter:derived-instances.
 
 For any type that is an instance of class `Bounded` as well as `Enum`, the following should hold:
 
@@ -469,9 +469,9 @@ For any type that is an instance of class `Bounded` as well as `Enum`, the follo
 
 The following `Prelude` types are instances of `Enum`:
 - Enumeration types: `()`, `Bool`, and `Ordering`. The
-  semantics of these instances is given by Chapter~\ref{derived-appendix}.
+  semantics of these instances is given by @chapter:derived-instances.
   For example, `[LT ..]` is the list `[LT,EQ,GT]`.
-- `Char`: the instance is given in Chapter~\ref{stdprelude},   based
+- `Char`: the instance is given in @chapter:standard-prelude,   based
   on the primitive functions that convert between a `Char` and an `Int`.
   For example, `enumFromTo 'a' 'z'` denotes
   the list of lowercase letters in alphabetical order.
@@ -539,10 +539,10 @@ class  Monad m  where
 ```
 
 The `Monad` class defines the basic operations over a _monad_.
-See @chapter:basic-input-output[Chapter] for more information about monads.
+See @chapter:basic-input-output for more information about monads.
 
 "`do`" expressions provide a convenient syntax for writing
-monadic expressions (see Section~\ref{do-expressions}).
+monadic expressions (see @sec:do-expressions).
 The `fail` method is invoked on pattern-match failure in a `do`
 expression.
 
@@ -550,7 +550,7 @@ In the Prelude, lists,
 `Maybe`, and `IO` are all instances of `Monad`.
 The `fail` method for lists returns the empty list `[]`,
 for `Maybe` returns `Nothing`, and for `IO` raises a user
-exception in the IO monad (see Section~\ref{io-exceptions}).
+exception in the IO monad (see @sec:io-exceptions).
 
 Instances of `Monad` should satisfy the following laws:
 
@@ -733,7 +733,7 @@ realToFrac   :: (Real a, Fractional b) => a -> b
 === Numeric Literals <sec:numeric-literals>
 
 The syntax of numeric literals is given in
-Section~\ref{lexemes-numeric}.  An integer literal represents the
+@sec:lexemes-numeric.  An integer literal represents the
 application
 of the function `fromInteger` to the appropriate
 value of type `Integer`.  Similarly, a floating literal stands for an application of
@@ -746,12 +746,12 @@ integer and floating literals have the
 typings `(Num a) => a` and `(Fractional a) => a`, respectively.
 Numeric literals are defined in this indirect way so that they may be
 interpreted as values of any appropriate numeric type.
-See Section~\ref{default-decls} for a discussion of overloading ambiguity.
+See @sec:default-decls for a discussion of overloading ambiguity.
 
 === Arithmetic and Number-Theoretic Operations
 
 The infix class methods `(+)`, `(*)`, `(-)`, and the unary function `negate` (which can also be written as a prefix minus sign; see
-section~\ref{operators}) apply to all numbers.  
+@sec:operator-applications) apply to all numbers.  
 The class methods
 `quot`, `rem`, `div`, and `mod` apply only to integral numbers, while the class method `(/)`
 applies only to fractional ones.

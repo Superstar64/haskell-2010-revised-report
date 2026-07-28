@@ -173,7 +173,7 @@ If some code is commented out using a nested comment, then any
 occurrence of `{-` or `-}` within a string or within an end-of-line
 comment in that code will interfere with the nested comments.
 
-== Identifiers and Operators
+== Identifiers and Operators <sec:ids>
 
 #table(
   columns: 3,
@@ -315,7 +315,7 @@ for example, `Prelude.+` is an infix operator with the same fixity as the
 definition of `+` in the Prelude (@sec:fixity-declarations).
 
 
-== Numeric Literals
+== Numeric Literals <sec:lexemes-numeric>
 
 #table(
   columns: 3,
@@ -349,7 +349,7 @@ for another use of the dot character.  Negative numeric literals are
 discussed in @sec:operator-applications.  The typing of numeric literals
 is discussed in @sec:numeric-literals.
 
-== Character and String Literals
+== Character and String Literals <sec:lexemes-char>
 
 #table(
   columns: 3,
