@@ -231,7 +231,7 @@ lambda abstractions extend to the right as far as possible.
 
 == Layout <sec:layout>
 
-Section~\ref{lexemes-layout} gives an informal discussion of the layout
+@sec:lexemes-layout gives an informal discussion of the layout
 rule. This section defines it more precisely.
 
 The meaning of a Haskell program may depend on its _layout_.
@@ -253,7 +253,7 @@ The input to $L$ is:
     same line, this lexeme is preceded by $italic("<n>")$ where $n$
     is the indentation of the lexeme, provided that it is not,
     as a consequence of the first two rules, preceded by `{n}`.
-    (NB: a string literal may span multiple lines -- Section~\ref{lexemes-char}.  So in the fragment
+    (NB: a string literal may span multiple lines -- @sec:lexemes-char.  So in the fragment
     ```
     f = ("Hello \
           \Bill", "Jake")
@@ -335,7 +335,7 @@ construction operator, and "`[]`" for the empty stream.
   A parse error results if an explicit close brace matches an implicit open brace.
 
 / Note 4.: This clause means that all brace pairs are treated as explicit layout 
-  contexts, including labelled construction and update (Section~\ref{field-ops}). 
+  contexts, including labelled construction and update (@sec:field-ops). 
   This is a difference between this formulation and Haskell 1.4.
 
 / Note 5.: The side condition $italic("parse-error") (t)$ is to be interpreted as follows: 
@@ -379,7 +379,7 @@ program; all other lines are comments.
 The program text is recovered
 by taking only those lines beginning with "`>`", 
 and replacing the leading "`>`" with a space.
-Layout and comments apply exactly as described in Chapter~\ref{syntax} in the resulting text.
+Layout and comments apply exactly as described in @chapter:syntax-reference in the resulting text.
 
 To capture some cases where one omits an "`>`" by mistake, it is an
 error for a program line to appear adjacent to a non-blank comment line,

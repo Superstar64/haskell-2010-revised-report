@@ -413,7 +413,7 @@ example,
 String literals are actually abbreviations for lists of characters
 (see @sec:lists).
 
-== Layout
+== Layout <sec:lexemes-layout>
 
 Haskell permits the omission of the braces and semicolons used in several
 grammar productions, by

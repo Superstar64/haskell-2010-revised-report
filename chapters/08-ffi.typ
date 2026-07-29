@@ -262,8 +262,8 @@ _marshallable foreign types;_ that is, either
 Consequently, in order for a type defined by `newtype` to be used in a
 `foreign` declaration outside of the module that defines it, the type
 must not be exported abstractly.  The module `Foreign.C.Types` that
-defines the Haskell equivalents for C types follows this convention;
-see Chapter~\ref{module:Foreign.C.Types}.
+defines the Haskell equivalents for C types follows this convention.
+//;see Chapter~\ref{module:Foreign.C.Types}.
 
 *Marshallable foreign result types.*
 The result type $italic("rt")$ produced by $italic("frtype")$ must be a
@@ -394,7 +394,7 @@ semantics for the calling conventions `ccall` and `stdcall`.  Other
 calling conventions from @tab:callconv are expected to be defined
 in future versions of Haskell.
 
-=== Standard C Calls
+=== Standard C Calls <sec:ccall>
 
 The following defines the structure of external entities for foreign
 declarations under the `ccall` calling convention for both import and
@@ -658,8 +658,7 @@ in a foreign function declaration should be matched by `HsT` in the
 corresponding C function prototype.  Indeed, where the Haskell system
 translates Haskell to C code that invokes `foreign` `import`ed C
 routines, such prototypes need to be provided and included via the header that
-can be specified in external entity strings for foreign C functions (cf.\ 
-Section~\ref{sec:ccall}); otherwise, the system behaviour is undefined.  It is
+can be specified in external entity strings for foreign C functions (cf. @sec:ccall); otherwise, the system behaviour is undefined.  It is
 guaranteed that the Haskell value `nullPtr` is mapped to `(HsPtr) NULL` in C and `nullFunPtr` is mapped to `(HsFunPtr) NULL` and
 vice versa.
 

@@ -19,7 +19,7 @@ however, it is best to think of a monad as an _abstract datatype_.
 In the case of the I/O monad, the abstract values are the _actions_
 mentioned above.  Some operations are primitive actions,
 corresponding to conventional I/O operations.  Special operations
-(methods in the class `Monad`, see Section~\ref{monad-class})
+(methods in the class `Monad`, see @sec:monad-class)
 sequentially compose actions,
 corresponding to sequencing operators (such as the semicolon) in imperative
 languages.
@@ -37,7 +37,7 @@ two characters of input, return and linefeed, may read as a single
 newline character.  These functions cannot be used portably for binary
 I/O.
 
-In the following, recall that `String` is a synonym for `[Char]` (Section~\ref{characters}).
+In the following, recall that `String` is a synonym for `[Char]` (@subsec:characters).
 
 *Output Functions*
 These functions write to the standard output device (this is normally
@@ -71,7 +71,7 @@ the user's terminal).
   readIO      :: Read a => String -> IO a
   readLn      :: Read a => IO a
 ```
-The `getChar` operation raises an exception (Section~\ref{io-exceptions}) on end-of-file; a
+The `getChar` operation raises an exception (@sec:io-exceptions) on end-of-file; a
 predicate `isEOFError` that identifies this exception is defined in the `IO` library.
 The `getLine` operation raises an exception under the same circumstances as `hGetLine`,
 defined the `IO` library.
@@ -206,7 +206,7 @@ outer handler.  The `isEOFError` function is part of `IO` library.
 When an exception propagates outside the main program, the Haskell
 system prints the associated `IOError` value and exits the program.
 
-The `fail` method of the `IO` instance of the `Monad` class (Section~\ref{monad-class}) raises a
+The `fail` method of the `IO` instance of the `Monad` class (@sec:monad-class) raises a
 `userError`, thus:
 ```haskell
   instance Monad IO where
@@ -215,4 +215,4 @@ The `fail` method of the `IO` instance of the `Monad` class (Section~\ref{monad-
     fail s = ioError (userError s)
 ```
 The exceptions raised by the I/O functions in the Prelude are defined
-in Chapter~\ref{module:System.IO.Error}.
+in the module `System.IO.Error`.// %Chapter~\ref{module:System.IO.Error}.

@@ -525,7 +525,7 @@ $
 
 All instances of `Functor` defined in the Prelude satisfy these laws.
 
-=== The Monad Class
+=== The Monad Class <sec:monad-class>
 
 ```haskell
 class  Monad m  where
