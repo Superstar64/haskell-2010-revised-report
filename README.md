@@ -46,3 +46,5 @@ We have adopted the [Haskell Foundation Guidelines for Respectful Communication]
 - The Haskell Prime mailing list archive is available [here](https://mailman.haskell.org/mailman3/lists/haskell-prime.haskell.org/)
 - The Monad of no return proposal is available [here](https://gitlab.haskell.org/ghc/ghc/-/wikis/proposal/monad-of-no-return)
 - The MonadFail proposal is available [here](https://gitlab.haskell.org/haskell/prime/-/wikis/libraries/proposals/monad-fail)
+- The Functor-Applicative-Monad proposal is available [here](https://wiki.haskell.org/Functor-Applicative-Monad_Proposal)
+- The Foldable-Traversable ("Burning Bridges") proposal is available [here](https://wiki.haskell.org/Foldable_Traversable_In_Prelude)
