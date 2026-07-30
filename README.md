@@ -22,8 +22,26 @@ continuously watches for file changes and rebuilds the pdf on every change.
 
 The `Makefile` contains a html target, but the layout has not yet been optimized for HTML, and there are various bugs that have to be fixed.
 
+## Building the Standard Library Documentation
+
+The standard library is now available as a Haskell package which exposes the API defined by the Haskell 2010 report in the [stdlib](./stdlib/) subdirectory.
+This library exposes the specified API of the report, but does not provide any implementation of the exposed functions. You can build the API documentation as follows:
+
+```console
+> cd stdlib
+> cabal haddock
+```
+
 ## How to Contribute
 
 The contribution process is documented in [CONTRIBUTING.md](CONTRIBUTING.md)
 
 We have adopted the [Haskell Foundation Guidelines for Respectful Communication](https://haskell.foundation/guidelines-for-respectful-communication/) for this project.
+
+## References and Prior Work
+
+- The verb/latex sources for the Haskell 2010 language report are available at [github.com/haskell/haskell-report](https://github.com/haskell/haskell-report)
+- The discussions of the Haskell Prime committee are archived at [github.com/haskell/rfcs](https://github.com/haskell/rfcs)
+- The Haskell Prime mailing list archive is available [here](https://mailman.haskell.org/mailman3/lists/haskell-prime.haskell.org/)
+- The Monad of no return proposal is available [here](https://gitlab.haskell.org/ghc/ghc/-/wikis/proposal/monad-of-no-return)
+- The MonadFail proposal is available [here](https://gitlab.haskell.org/haskell/prime/-/wikis/libraries/proposals/monad-fail)

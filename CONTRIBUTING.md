@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-The Haskell report belongs to the entire Haskell community, and everyone is encouraged to contribute issues, PRs and to participate in the discussions. You don't have to be a member of the language committee to meaningfully contribute to the next version of the report!
+The Haskell report belongs to the entire Haskell community, and everyone is encouraged to contribute issues, PRs and to participate in the discussions. You don't have to be a member of a committee to meaningfully contribute to the next version of the report!
 
 ## Scope of the Project
 
@@ -15,14 +15,3 @@ The rule of thumb is that a change is considered major if it will appear in the 
 
 We expect to see a lot of pull requests that fix minor issues with the report, such as typo fixes, layout improvements, minor improvements to the code and infrastructure etc.
 These minor changes do not require a corresponding issue.
-
-## Who Makes the Final Decision
-
-The final authority to merge PRs and apply changes lies with the language committee. Members of the language committee can decide autonomously to merge PRs that fix minor issues.
-
-
-## Members of the Language Committee
-
-The following people are members of the language committee responsible for organizing the revised Haskell 2010 language report.
-
-
