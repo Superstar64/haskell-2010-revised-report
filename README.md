@@ -5,6 +5,7 @@ This repository contains the files required to build the revised version of the 
 ## How to Build the PDF report
 
 In order to build the report you have to install Typst version `0.15` or later.
+Typst is available at [typst.app/](https://typst.app/).
 
 The `Makefile` contains a target to build the report, but the two following commands also work:
 
