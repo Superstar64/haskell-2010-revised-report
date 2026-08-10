@@ -217,8 +217,8 @@ Special syntax is provided to allow certain type expressions to be written
 in a more traditional style:
 
 1. A _function type_ has the form $t_1 -> t_2$, which is equivalent to the type
-$(->) t_1 t_2$.  Function arrows associate to the right.
-For example, `Int -> Int -> Float` means `Int -> (Int -> Float)`.
+   $(->) t_1 t_2$.  Function arrows associate to the right.
+   For example, `Int -> Int -> Float` means `Int -> (Int -> Float)`.
 2. A _tuple type_ has the form $(t_1, dots, t_k)$, where $k >= 2$, which is equivalent to
    the type $(,dots,) t_1 dots t_k$ where there are
    $k-1$ commas between the parenthesis.  It denotes the
@@ -1660,7 +1660,7 @@ which would be included in the same dependency group:
 ```
 The kinds of variables, constructors, and classes within each group
 are determined using standard techniques of type inference and
-kind-preserving unification \cite{jones:cclasses}.  For example, in the
+kind-preserving unification @jones:cclasses.  For example, in the
 definitions above, the parameter `a` appears as an argument of the
 function constructor `(->)` in the type of `bar` and hence must
 have kind $ast$.  It follows that both `D` and `S` must have
