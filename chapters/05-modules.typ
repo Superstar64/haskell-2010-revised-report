@@ -644,11 +644,14 @@ It is not possible, however, to hide `instance` declarations in the
 
 == Mutually Recursive Modules
 
-Implementations are only required to provide support for acyclic modules.
-Implementations may provide mutually recursive module support at their own
-digression. Such support may have arbitrary requirements and limitations such
-as additional information that they may be referenced before module compilitaion
-and explicit type signatures for all exported values.
+Implementations are only required to provide support for acyclic module imports
+(though they must support mutually recursive declaration groups within a single module).
+
+Implementations that permit mutually recursive module imports (as a non-standard
+extension) may impose additional requirements and limitations, such
+as:
+- requiring that imported modules contain additional information so that they may be referenced before they are compiled; or
+- requiring explicit type signatures for all exported values.
 
 == Abstract Datatypes <sec:abstract-types>
 
