@@ -20,6 +20,8 @@ which must be a computation of type $mono("IO") tau$ for some type $tau$
 Modules may reference other modules via explicit
 `import` declarations, each giving the name of a module to be
 imported and specifying its entities to be imported.
+Implementations are only required to support acyclic module graphs
+(see @sec:mutual-recursion).
 
 Modules are used for name-space control, and are not first class values.
 A multi-module Haskell program can be converted into a single-module
@@ -642,7 +644,7 @@ to `++` imported from `MyPrelude`.
 It is not possible, however, to hide `instance` declarations in the
 `Prelude`.  For example, one cannot define a new instance for `Show Char`.
 
-== Mutually Recursive Modules
+== Mutually Recursive Modules <sec:mutual-recursion>
 
 Implementations are only required to provide support for acyclic module imports
 (though they must support mutually recursive declaration groups within a single module).
