@@ -18,4 +18,4 @@ The definition of the nonterminal $nonterminal("reservedid")$ has been changed t
 
 #heading(level: 3, numbering: none)[Remove mutually recursive modules]
 
-The requirement to support mutually recursive modules has been lifted.
+The requirement to support mutually recursive module imports has been lifted.
