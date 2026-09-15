@@ -1286,8 +1286,8 @@ is not a valid pattern.
 ==== Pattern bindings <sec:pattern-bindings>
 
 A pattern binding binds variables to values.  A _standalone_ pattern
-binding has form $p = e$, where $p$ is any pattern. A _simple_ pattern
-binding has form $x = e$, where $x$ is a single variable.
+binding has form $p = e$, where $p$ is any pattern (see #nonterminal("pat")). A _simple_ pattern
+binding has form $x = e$, where $x$ is a single variable (see #nonterminal("var")).
 The pattern $p$ is
 matched "lazily" as an irrefutable pattern, as if there were an implicit `~` in front 
 of it.  See the translation in
