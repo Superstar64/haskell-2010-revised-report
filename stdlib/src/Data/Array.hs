@@ -122,7 +122,7 @@ infixl 9 !
 (!) = (!)
 
 -- | The bounds with which an array was constructed.
-bounds :: (Ix i) => Array i e -> (i, i)
+bounds :: Array i e -> (i, i)
 bounds = bounds
 
 -- | The list of indices of an array in ascending order.
@@ -130,7 +130,7 @@ indices :: (Ix i) => Array i e -> [i]
 indices = indices
 
 -- | The list of elements of an array in index order.
-elems :: (Ix i) => Array i e -> [e]
+elems :: Array i e -> [e]
 elems = elems
 
 -- | The list of associations of an array in index order.
