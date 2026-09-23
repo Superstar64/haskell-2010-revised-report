@@ -118,7 +118,7 @@ lambda abstractions extend to the right as far as possible.
   // octit
   $nonterminaldef("octit")$, $->$, $terminal("0") | terminal("1") | dots | terminal("7")$,
   // hexit
-  $nonterminaldef("hexit")$, $->$, $nonterminal("digit") | terminal("A") | dots | terminal("F") | terminal("a") | dots | terminal("f")$,
+  $nonterminaldef("hexit")$, $->$, $nonterminal("ascDigit") | terminal("A") | dots | terminal("F") | terminal("a") | dots | terminal("f")$,
 )
 
 #table(
@@ -131,7 +131,7 @@ lambda abstractions extend to the right as far as possible.
   $nonterminaldef("conid")$, $->$, $nonterminal("large") {nonterminal("small") | nonterminal("large") | nonterminal("digit") | terminal("'") med }$,
   // reservedid
   $nonterminaldef("reservedid")$, $->$, $terminal("case") | terminal("class") | terminal("data") | terminal("default") | terminal("deriving") | terminal("do") | terminal("else")$,
-  [], $|$, $terminal("foreign") | terminal("if") | terminal("import") | terminal("in") | terminal("infix") | terminal("infixl")$,
+  [], $|$, $terminal("forall") | terminal("foreign") | terminal("if") | terminal("import") | terminal("in") | terminal("infix") | terminal("infixl")$,
   [], $|$, $terminal("infixr") | terminal("instance") | terminal("let") | terminal("module") | terminal("newtype") | terminal("of")$,
   [], $|$, $terminal("then") | terminal("type") | terminal("where") | terminal("_")$,
 )
@@ -190,7 +190,7 @@ lambda abstractions extend to the right as far as possible.
   align: (left, center, left),
   stroke: none,
   // decimal
-  $nonterminaldef("decimal")$, $->$, $nonterminal("digit"){nonterminal("digit")}$,
+  $nonterminaldef("decimal")$, $->$, $nonterminal("ascDigit"){nonterminal("ascDigit")}$,
   // octal
   $nonterminaldef("octal")$, $->$, $nonterminal("octit"){nonterminal("octit")}$,
   // hexadecimal

@@ -128,7 +128,7 @@ Haskell compilers are expected to make use of new versions of Unicode as they ar
   // octit
   $italic("octit")$, $->$, $terminal("0") | terminal("1") | dots | terminal("7")$,
   // hexit
-  $italic("hexit")$, $->$, $nonterminal("digit") | terminal("A") | dots | terminal("F") | terminal("a") | dots | terminal("f")$,
+  $italic("hexit")$, $->$, $nonterminal("ascDigit") | terminal("A") | dots | terminal("F") | terminal("a") | dots | terminal("f")$,
 )
 
 Lexical analysis should use the ``maximal munch'' rule:
@@ -185,7 +185,7 @@ comment in that code will interfere with the nested comments.
   $italic("conid")$, $->$, $nonterminal("large") {nonterminal("small") | nonterminal("large") | nonterminal("digit") | terminal("'") med }$,
   // reservedid
   $italic("reservedid")$, $->$, $terminal("case") | terminal("class") | terminal("data") | terminal("default") | terminal("deriving") | terminal("do") | terminal("else")$,
-  [], $|$, $terminal("foreign") | terminal("if") | terminal("import") | terminal("in") | terminal("infix") | terminal("infixl")$,
+  [], $|$, $terminal("forall") | terminal("foreign") | terminal("if") | terminal("import") | terminal("in") | terminal("infix") | terminal("infixl")$,
   [], $|$, $terminal("infixr") | terminal("instance") | terminal("let") | terminal("module") | terminal("newtype") | terminal("of")$,
   [], $|$, $terminal("then") | terminal("type") | terminal("where") | terminal("_")$,
 )
@@ -321,7 +321,7 @@ definition of `+` in the Prelude (@sec:fixity-declarations).
   align: (left, center, left),
   stroke: none,
   // decimal
-  $italic("decimal")$, $->$, $nonterminal("digit"){nonterminal("digit")}$,
+  $italic("decimal")$, $->$, $nonterminal("ascDigit"){nonterminal("ascDigit")}$,
   // octal
   $italic("octal")$, $->$, $nonterminal("octit"){nonterminal("octit")}$,
   // hexadecimal
