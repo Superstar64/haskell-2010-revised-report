@@ -16,6 +16,10 @@ These standard libraries are now available in the form of a zero-dependency Hask
 
 The definition of the nonterminal $nonterminal("reservedid")$ has been changed to also include the terminal $terminal("forall")$ as a reserved identifier.
 
+#heading(level: 3, numbering: none)[Decimal characters in numeric literals]
+
+The definitions of the nonterminals $nonterminal("decimal")$ and $nonterminal("hexit")$ have been changed to exclude Unicode decimal digits other than $terminal("0")$ to $terminal("9")$.
+
 #heading(level: 3, numbering: none)[Remove mutually recursive modules]
 
 The requirement to support mutually recursive module imports has been lifted:
