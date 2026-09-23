@@ -1,5 +1,3 @@
-#import "@preview/diagraph:0.3.7"
-
 The Haskell Prelude contains predefined classes, types,
 and functions that are implicitly imported into every Haskell
 program.  In this chapter, we describe the types and classes found in
@@ -191,50 +189,7 @@ are instances of these classes.
 
 #figure(
   caption: "Standard Haskell Classes",
-  diagraph.raw-render(
-    // Scale the width to the page
-    width:95%,
-    ```dot
-      digraph {
-        node[width=1.8, height=1.2, fixedsize=true];
-
-        eq[label=<<b>Eq</b><br/>All except IO, (-&gt;)>];
-        show[label=<<b>Show</b><br/>All except IO, (-&gt;)>];
-        read[label=<<b>Read</b><br/>All except IO, (-&gt;)>];
-        ord[label=<<b>Ord</b><br/>All except IO, (-&gt;)<br/>IO, IOError>];
-        num[label=<<b>Num</b><br/>Int, Integer<br/>Float, Double>];
-        bounded[label=<<b>Bounded</b><br/>Int, Char, Bool, ()<br/>Ordering, Tuples>];
-        enum[label=<<b>Enum</b><br/>(), Bool, Char, Ordering<br/>Int, Integer, Float<br/>Double>];
-        real[label=<<b>Real</b><br/>Int, Integer,<br/>Float, Double>];
-        fractional[label=<<b>Fractional</b><br/>Float, Double>];
-        integral[label=<<b>Integral</b><br/>Int, Integer>];
-        realfrac[label=<<b>RealFrac</b><br/>Float, Double>];
-        floating[label=<<b>Floating</b><br/>Float, Double>];
-        realfloat[label=<<b>RealFloat</b><br/>Float, Double>];
-        monad[label=<<b>Monad</b><br/>IO, [], Maybe>];
-        functor[label=<<b>Functor</b><br/>IO, [], Maybe>];
-
-        eq -> ord;
-        eq -> num;
-        show -> num;
-        ord -> real;
-        num -> real;
-        num -> fractional;
-        enum -> integral;
-        real -> integral;
-        real -> realfrac;
-        fractional -> realfrac;
-        fractional -> floating;
-        realfrac -> realfloat;
-        floating -> realfloat;
-
-        // Group the standalone typeclasses
-        read -> bounded[style=invis];
-        bounded -> monad[style=invis];
-        monad -> functor[style=invis];
-      }
-    ```
-  )
+  image("../images/standard-classes.svg")
 )<fig:standard-classes>
 
 Default class method declarations (@sec:type-classes) are provided
