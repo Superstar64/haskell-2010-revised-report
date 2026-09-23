@@ -16,7 +16,7 @@ These standard libraries are now available in the form of a zero-dependency Hask
 
 The definition of the nonterminal $nonterminal("reservedid")$ has been changed to also include the terminal $terminal("forall")$ as a reserved identifier.
 
-#heading(level: 3, numbering: none)[Removal of datatype context from the standard libraries]
+#heading(level: 3, numbering: none)[Removal of datatype contexts from the standard libraries]
 
 The datatype contexts have been removed from the standard libraries. Note that
-datatype context themselves are not removed from the language.
+datatype contexts themselves are not removed from the language.
