@@ -64,5 +64,8 @@ haskell-2010-revised.pdf: haskell-2010-revised.typ $(DEPENDENCY)
 haskell-2010-revised-html/index.html: haskell-2010-revised-html.typ $(DEPENDENCY) $(HTML_DEPENDENCY)
 	typst compile --format bundle --features bundle --features html haskell-2010-revised-html.typ
 
-images/standard-classes.svg: images/standard-classes.dot
-	dot -Tsvg images/standard-classes.dot -o images/standard-classes.svg
+images/standard-classes-template.svg: images/standard-classes.dot
+	dot -Tsvg images/standard-classes.dot -o images/standard-classes-template.svg
+
+images/standard-classes.svg: images/standard-classes-template.svg images/bold.py
+	python images/bold.py images/standard-classes-template.svg images/standard-classes.svg
