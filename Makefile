@@ -58,10 +58,16 @@ html: haskell-2010-revised-html/index.html
 watch-html:
 	typst watch --format bundle --features bundle --features html haskell-2010-revised-html.typ
 
-haskell-2010-revised.pdf: haskell-2010-revised.typ $(DEPENDENCY)
+.PHONY: depend-pdf
+haskell-2010-revised.pdf depend-pdf: haskell-2010-revised.typ $(DEPENDENCY)
+
+haskell-2010-revised.pdf: 
 	typst compile haskell-2010-revised.typ
 
-haskell-2010-revised-html/index.html: haskell-2010-revised-html.typ $(DEPENDENCY) $(HTML_DEPENDENCY)
+.PHONY: depend-html
+haskell-2010-revised-html/index.html depend-html: haskell-2010-revised-html.typ $(DEPENDENCY) $(HTML_DEPENDENCY)
+
+haskell-2010-revised-html/index.html: 
 	typst compile --format bundle --features bundle --features html haskell-2010-revised-html.typ
 
 images/standard-classes-template.svg: images/standard-classes.dot
