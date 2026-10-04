@@ -86,7 +86,7 @@ There is no upper bound on the size of a tuple, but some Haskell
 implementations may restrict the size of tuples, and limit the
 instances associated with larger tuples.  However, every Haskell
 implementation must support tuples up to size 15, together with the instances
-for `Eq`, `Ord`, `Bounded`, `Read`, and `Show`.  
+for `Eq`, `Ord`, `Bounded`, `Read`, and `Show`.
 The Prelude and
 libraries define tuple functions such as `zip` for tuples up to a size
 of 7.
@@ -181,16 +181,23 @@ f $ g $ h x  =  f (g (h x))
 It is also useful in higher-order situations, such as `map ($ 0) xs`,
 or `zipWith ($) fs xs`.
 
-== Standard Haskell Classes
+== Standard Haskell Classes <sec:standard-haskell-classes>
 
-@fig:standard-classes shows the hierarchy of
-Haskell classes defined in the Prelude and the Prelude types that
-are instances of these classes.
+The standard classes include the hierarchy of numeric classes (@fig:numeric-classes),
+the Functor--Monad hierarchy (@fig:functor-monad-classes),
+and miscellaneous classes `Show`, `Read` (@subsec:read-show) and `Bounded` (@subsec:bounded).
+
 
 #figure(
-  caption: "Standard Haskell Classes",
-  image("../images/standard-classes.svg")
-)<fig:standard-classes>
+  caption: "Numeric Haskell Classes",
+  image("../images/numeric-classes.svg")
+)<fig:numeric-classes>
+
+
+#figure(
+  caption: "Haskell Classes of the Monadic Hierarchy",
+  image("../images/functor-monad-classes.svg")
+)<fig:functor-monad-classes>
 
 Default class method declarations (@sec:type-classes) are provided
 for many of the methods in standard classes.  A comment with each
@@ -264,7 +271,7 @@ The default declarations allow a user to create an `Ord` instance
 either with a type-specific `compare` function or with type-specific
 `==` and `<=` functions.
 
-=== The Read and Show Classes
+=== The Read and Show Classes <subsec:read-show>
 
 ```haskell
 type  ReadS a = String -> [(a,String)]
@@ -484,7 +491,7 @@ mapM_     :: Monad m => (a -> m b) -> [a] -> m ()
 (=<<)     :: Monad m => (a -> m b) -> m a -> m b
 ```
 
-=== The Bounded Class
+=== The Bounded Class <subsec:bounded>
 
 ```haskell
 class  Bounded a  where
@@ -507,7 +514,7 @@ types are in `Bounded`.
 Haskell provides several kinds of numbers; the numeric
 types and the operations upon them have been heavily influenced by Common Lisp and Scheme.
 Numeric function names and operators are usually overloaded, using
-several type classes with an inclusion relation shown in @fig:standard-classes.
+several type classes with an inclusion relation shown in @fig:numeric-classes.
 The class `Num` of numeric
 types is a subclass of `Eq`, since all numbers may be compared for equality; its subclass `Real` is also a subclass of `Ord`, since the other comparison operations
 apply to all but complex numbers (defined in the `Complex` library).
@@ -539,16 +546,16 @@ of the standard library.
     table.hline(),
     [`Integer`], [`Integral`], [Arbitrary-precision integers],
     [`Int`], [`Integral`], [Rational numbers],
-    [`(Integral a) => Ratio a`], [`RealFrac`], [Rational numbers],
+    [`Ratio a`], [`RealFrac`], [Rational numbers],
     [`Float`], [`RealFloat`], [Real floating-point, single precision],
     [`Double`], [`RealFloat`], [Real floating-point, double precision],
-    [`(RealFloat a) => Complex a`], [`Floating`], [Complex floating-point],
+    [`Complex a`], [`Floating`], [Complex floating-point],
     table.hline(),
   )
 )<fig:numeric-types>
 
 The default floating point operations defined by the Haskell
-Prelude do not 
+Prelude do not
 conform to current language independent arithmetic (LIA) standards.  These
 standards require considerably more complexity in the numeric
 structure and have thus been relegated to a library.  Some, but not
@@ -572,7 +579,7 @@ infinity, indefinite, etc.
 The standard numeric classes and other numeric functions defined in
 the Prelude are shown
 in @fig:basic-numeric-1 @fig:basic-numeric-2.
-@fig:standard-classes shows the class dependencies and
+@fig:numeric-classes shows the class dependencies and
 built-in types that are instances of the numeric classes.
 
 #figure(
@@ -625,7 +632,7 @@ class  (RealFrac a, Floating a) => RealFloat a  where
     exponent            :: a -> Int
     significand         :: a -> a
     scaleFloat          :: Int -> a -> a
-    isNaN, isInfinite, isDenormalized, isNegativeZero, isIEEE 
+    isNaN, isInfinite, isDenormalized, isNegativeZero, isIEEE
                         :: a -> Bool
     atan2               :: a -> a -> a
 
@@ -659,7 +666,7 @@ See @sec:default-decls for a discussion of overloading ambiguity.
 === Arithmetic and Number-Theoretic Operations
 
 The infix class methods `(+)`, `(*)`, `(-)`, and the unary function `negate` (which can also be written as a prefix minus sign; see
-@sec:operator-applications) apply to all numbers.  
+@sec:operator-applications) apply to all numbers.
 The class methods
 `quot`, `rem`, `div`, and `mod` apply only to integral numbers, while the class method `(/)`
 applies only to fractional ones.
@@ -685,7 +692,7 @@ odd    =  not . even
 ```
 Finally, there are the greatest common divisor and least common
 multiple functions.  `gcd` $x$ $y$ is the greatest
-(positive) integer that divides both $x$ and $y$; for example `gcd (-3) 6 = 3`, `gcd (-3) (-6) = 3`, 
+(positive) integer that divides both $x$ and $y$; for example `gcd (-3) 6 = 3`, `gcd (-3) (-6) = 3`,
 `gcd 0 4 = 4`. `gcd 0 0` raises a runtime error.
 
 `lcm` $x$ $y$ is the smallest positive integer that both $x$ and $y$ divide.

@@ -19,6 +19,8 @@ watch-html:
 # Makefile implementation
 #
 
+GRAPHS=images/numeric-classes.svg images/functor-monad-classes.svg
+
 DEPENDENCY=bibliography.bib\
  chapters/01-intro.typ\
  chapters/02-lexical-structure.typ\
@@ -32,7 +34,7 @@ DEPENDENCY=bibliography.bib\
  chapters/10-syntax-reference.typ\
  chapters/11-derived-instances.typ\
  chapters/12-compiler-pragmas.typ\
- images/standard-classes.svg\
+ $(GRAPHS)\
  macros.typ\
  other/preface.typ\
  other/preface_revised.typ\
@@ -70,8 +72,8 @@ haskell-2010-revised-html/index.html depend-html: haskell-2010-revised-html.typ 
 haskell-2010-revised-html/index.html: 
 	typst compile --format bundle --features bundle --features html haskell-2010-revised-html.typ
 
-images/standard-classes-template.svg: images/standard-classes.dot
-	dot -Tsvg images/standard-classes.dot -o images/standard-classes-template.svg
+$(GRAPHS:%.svg=%-template.svg): images/%-template.svg: images/%.dot
+	dot -Tsvg $< -o $@
 
-images/standard-classes.svg: images/standard-classes-template.svg images/bold.py
-	python images/bold.py images/standard-classes-template.svg images/standard-classes.svg
+$(GRAPHS): images/%.svg: images/%-template.svg images/bold.py
+	python images/bold.py $< $@
