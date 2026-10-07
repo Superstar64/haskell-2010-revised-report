@@ -20,6 +20,11 @@ The definition of the nonterminal $nonterminal("reservedid")$ has been changed t
 
 The definitions of the nonterminals $nonterminal("decimal")$ and $nonterminal("hexit")$ have been changed to exclude Unicode decimal digits other than $terminal("0")$ to $terminal("9")$.
 
+#heading(level: 3, numbering: none)[Removal of datatype contexts from the standard libraries]
+
+The datatype contexts have been removed from the standard libraries. Note that
+datatype contexts themselves are not removed from the language.
+
 #heading(level: 3, numbering: none)[Remove mutually recursive modules]
 
 The requirement to support mutually recursive module imports has been lifted:
