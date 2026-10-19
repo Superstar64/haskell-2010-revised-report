@@ -24,6 +24,8 @@
 // Section Headings
 #show heading.where(level: 2): set text(18pt)
 
+#show math.equation.where(block: false): set math.frac(style: "horizontal")
+
 #set par(
   justify: true,
 )

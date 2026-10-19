@@ -30,6 +30,7 @@
   v(0.6cm) + it + v(0.8cm)
 }
 
+#show math.equation.where(block: false): set math.frac(style: "horizontal")
 
 #set par(
   justify: true,
