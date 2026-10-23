@@ -30,12 +30,24 @@ jobs:
       - run: make pdf html
       - run: mkdir _site
       - run: cp -R haskell-2010-revised.pdf haskell-2010-revised-html _site
-      # Generate library report documentation      
+
+      # Generate HTML library report documentation    
       - run: cabal haddock --haddock-output-dir out
         working-directory: stdlib
       - run: mkdir _site/stdlib
       - run: cp stdlib/out/haskell2010-base/* _site/stdlib
 
+      # Generate PDF library report documentation
+      - run: make latex
+        working-directory: stdlib
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v4
+        with:
+          working_directory: stdlib/latex
+          root_file: main.tex
+      - run: cp stdlib/latex/main.pdf _site/library-report.pdf
+
+      # Upload _site
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site

@@ -1,15 +1,44 @@
+#let main_font_name = "Libertinus Serif"
+#let mono_font_name = "DejaVu Sans Mono"
+
+// In HTML output these symbols end up inside MathML, which only renders text
+// that sits in a token element, so emit an <mtext> with a class for styling.
+#let grammar-symbol(class, x) = html.elem("mtext", attrs: (class: class), x)
+
 /// Typesetting terminal symbols in the grammar
-#let terminal(x) = {
-  text(fill: eastern, $mono(#x)$)
+#let terminal(x) = context {
+  if target() == "paged" {
+    text(fill: eastern, font: mono_font_name)[#x]
+  } else {
+    grammar-symbol("terminal", x)
+  }
 }
 
 /// Typesetting nonterminal symbols in the gramma
-#let nonterminal(x) = {
-  link(label(x))[#text(fill: maroon, $italic(#x)$)]
+#let nonterminal(x) = context {
+  if target() == "paged" {
+    link(label(x))[#text(fill: maroon, style: "italic", font: main_font_name)[#x]]
+  } else {
+    link(label(x), grammar-symbol("nonterminal", x))
+  }
 }
 
-#let nonterminaldef(x) = {
-  [$italic(#x)$#raw("")#label(x)]
+#let varname(x) = context {
+  if target() == "paged" {
+    text(style: "italic", font: main_font_name)[#x]
+  } else {
+    grammar-symbol("varname", x)
+  }
+}
+
+#let nontermname(x) = varname(x)
+
+#let nonterminaldef(x) = context {
+  if target() == "paged" {
+    [#text(style: "italic", font: main_font_name)[#x]#raw("")#label(x)]
+  } else {
+    [#grammar-symbol("nonterminal", x)#raw("")#label(x)]
+  }
 }
 
 /// A box used in defining the meaning of syntactic entities by translation.

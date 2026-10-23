@@ -32,15 +32,15 @@ conjunction with argument and result types to resolve possible overloading.
 Regarding the second point, consider that many languages do not specify the
 exact representation of some basic types.  For example the type `int` in
 C may be 16, 32, or 64 bits wide.  Similarly, Haskell guarantees
-only that `Int` covers at least the range $[-2^(29), 2^(29) - 1]$ (@sec:numbers[Section]).  As
+only that `Int` covers at least the range $[-2^(29), 2^(29) - 1]$ (@sec:numbers).  As
 a consequence, to reliably represent values of C's `int` in Haskell, we
 have to introduce a new type `CInt`, which is guaranteed to match the
 representation of `int`.
 
 The specification of external names, dependent on a calling convention, is
-described in @sec:extent[Section], whereas the marshalling of the basic
+described in @sec:extent, whereas the marshalling of the basic
 types in dependence on a foreign language is described in
-@sec:marshalling[Section]
+@sec:marshalling.
 
 == Contexts
 
@@ -95,16 +95,16 @@ phrases:
   columns: 4,
   align: (left, center, left, left),
   stroke: none,
-  $italic("chname")$,$->$, ${italic("chchar")} terminal(".h")$, [(C header filename)],
-  $italic("cid")$, $->$, $italic("letter") {italic("letter") | nonterminal("ascDigit")}$, [(C identifier)],
-  $italic("chchar")$,$->$,$italic("letter") | nonterminal("ascSymbol")_(chevron.l mono("&") chevron.r)$, [],
-  $italic("letter")$, $->$, $nonterminal("ascSmall") | nonterminal("ascLarge") | terminal("_")$,[]
+  $nonterminaldef("chname")$,$->$, ${nonterminal("chchar")} terminal(".h")$, [(C header filename)],
+  $nonterminaldef("cid")$, $->$, $nonterminal("letter") {nonterminal("letter") | nonterminal("ascDigit")}$, [(C identifier)],
+  $nonterminaldef("chchar")$,$->$,$nonterminal("letter") | nonterminal("ascSymbol")_(chevron.l mono("&") chevron.r)$, [],
+  $nonterminaldef("letter")$, $->$, $nonterminal("ascSmall") | nonterminal("ascLarge") | terminal("_")$,[]
 )
 
-The range of lexemes that are admissible for $italic("chname")$ is a subset of
+The range of lexemes that are admissible for $nonterminal("chname")$ is a subset of
 those permitted as arguments to the `#include` directive in C.  In
-particular, a file name $italic("chname")$ must end in the suffix `.h`.  The
-lexemes produced by $italic("cid")$ coincide with those allowed as C identifiers,
+particular, a file name $nonterminal("chname")$ must end in the suffix `.h`.  The
+lexemes produced by $nonterminal("cid")$ coincide with those allowed as C identifiers,
 as specified in~@Kernighan1988.
 
 == Foreign Declarations
@@ -115,15 +115,15 @@ The syntax of foreign declarations is as follows:
   columns: 4,
   align: (left, center, left, left),
   stroke: none,
-  $italic("topdecl")$, $->$,$terminal("foreign") nonterminal("fdecl")$,[],
-  $italic("fdecl")$, $->$, $terminal("import") nonterminal("callconv") [nonterminal("safety")] nonterminal("impent") nonterminal("var") terminal("::") nonterminal("ftype")$, [(define variable)],
+  $nonterminal("topdecl")$, $->$,$terminal("foreign") nonterminal("fdecl")$,[],
+  $nonterminal("fdecl")$, $->$, $terminal("import") nonterminal("callconv") [nonterminal("safety")] nonterminal("impent") nonterminal("var") terminal("::") nonterminal("ftype")$, [(define variable)],
   $$, $|$,$terminal("export") nonterminal("callconv") nonterminal("expent") nonterminal("var") terminal("::") nonterminal("ftype")$,[(expose variable)"],
-  $italic("callconv")$, $->$,$terminal("ccall") | terminal("stdcall") | terminal("cplusplus")$,[(calling convention)],
+  $nonterminal("callconv")$, $->$,$terminal("ccall") | terminal("stdcall") | terminal("cplusplus")$,[(calling convention)],
   $$, $|$,$terminal("jvm") | terminal("dotnet")$,[],
   $$, $|$,$bold("system-specific calling conventions")$,[],
-  $italic("impent")$, $->$,$[nonterminal("string")]$, [],
-  $italic("expent")$, $->$, $[nonterminal("string")]$, [],
-  $italic("safety")$, $->$,$terminal("unsafe") | terminal("safe")$, []
+  $nonterminal("impent")$, $->$,$[nonterminal("string")]$, [],
+  $nonterminal("expent")$, $->$, $[nonterminal("string")]$, [],
+  $nonterminal("safety")$, $->$,$terminal("unsafe") | terminal("safe")$, []
 )
 
 There are two flavours of foreign declarations: import and export
@@ -139,7 +139,7 @@ The external context that contains the external entity is determined by the
 calling convention given in the foreign declaration.  Consequently, the exact
 form of the specification of the external entity is dependent on both the
 calling convention and on whether it appears in an import declaration (as
-$italic("impent")$) or in an export declaration (as $italic("expent")$).  To provide
+$nonterminal("impent")$) or in an export declaration (as $nonterminal("expent")$).  To provide
 syntactic uniformity in the presence of different calling conventions, it is
 guaranteed that the description of an external entity lexically appears as a
 Haskell string lexeme.  The only exception is where this string would be the
@@ -210,8 +210,7 @@ The following types constitute the set of _basic foreign types_:
   exported by the Haskell `Prelude` as well as
 - `Int8`, `Int16`, `Int32`, `Int64`, `Word8`,
   `Word16`, `Word32`, `Word64`, `Ptr a`, `FunPtr a`,
-  and `StablePtr a`, for any type `a`, as exported by `Foreign`
-  (Section~\ref{module:Foreign}).
+  and `StablePtr a`, for any type `a`, as exported by the module `Foreign` from the standard library.
 
 
 A Haskell system that implements the FFI needs to be able to pass these types
@@ -223,11 +222,11 @@ Foreign types are produced according to the following grammar:
   columns: 4,
   align: (left, center, left, left),
   stroke: none,
-  $italic("ftype")$, $->$, $nonterminal("frtype")$, [],
+  $nonterminal("ftype")$, $->$, $nonterminal("frtype")$, [],
   $$, $|$, $nonterminal("fatype") terminal("->") nonterminal("ftype")$,[],
-  $italic("frtype")$, $->$, $nonterminal("fatype")$, [],
+  $nonterminal("frtype")$, $->$, $nonterminal("fatype")$, [],
   $$, $|$,$terminal("()")$,[],
-  $italic("fatype")$, $->$, $nonterminal("qtycon") nonterminal("atype")_1 dots nonterminal("atype")_k$, $(k >= 0)$,
+  $nonterminal("fatype")$, $->$, $nonterminal("qtycon") nonterminal("atype")_1 dots nonterminal("atype")_k$, $(k >= 0)$,
 )
 
 
@@ -236,7 +235,7 @@ Haskell's types are permissible as foreign types, as only a restricted set of
 types can be canonically transferred between the Haskell context and an
 external context.  A foreign type has the form
 $
-  italic("at")_1 -> dots -> italic("at")_n -> italic("rt")
+  varname("at")_1 -> dots -> varname("at")_n -> varname("rt")
 $
 
 where $n >= 0$.  It implies that the arity of the external entity is $n$.
@@ -244,7 +243,7 @@ where $n >= 0$.  It implies that the arity of the external entity is $n$.
 External functions are strict in all arguments.
 
 *Marshallable foreign types.*
-The argument types $italic("at")_i$ produced by $italic("fatype")$ must be
+The argument types $varname("at")_i$ produced by $nonterminal("fatype")$ must be
 _marshallable foreign types;_ that is, either
 
 - a basic foreign type,
@@ -257,7 +256,7 @@ _marshallable foreign types;_ that is, either
   $
   and
   - the constructor $N$ is visible where $T$ is used,
-  - $t[t'_1 italic("/") a_1 dots t'_n italic("/") a_n]$ is a marshallable foreign type
+  - $t[t'_1 / a_1, dots, t'_n / a_n]$ is a marshallable foreign type
 
 Consequently, in order for a type defined by `newtype` to be used in a
 `foreign` declaration outside of the module that defines it, the type
@@ -266,7 +265,7 @@ defines the Haskell equivalents for C types follows this convention.
 //;see Chapter~\ref{module:Foreign.C.Types}.
 
 *Marshallable foreign result types.*
-The result type $italic("rt")$ produced by $italic("frtype")$ must be a
+The result type $varname("rt")$ produced by $nonterminal("frtype")$ must be a
 _marshallable foreign result type;_ that is, either
 
 - the type `()`,
@@ -279,7 +278,7 @@ _marshallable foreign result type;_ that is, either
   $
   and
   - the constructor $N$ is visible where $T$ is used,
-  - $t[t'_1 italic("/") a_1 dots t'_n italic("/") a_n]$ is a marshallable foreign result type
+  - $t[t'_1 / a_1, dots, t'_n / a_n]$ is a marshallable foreign result type
 
 === Import Declarations
 
@@ -292,7 +291,7 @@ which declares the variable $v$ of type $t$ to be defined externally.
 Moreover, it specifies that $v$ is evaluated by executing the external entity
 identified by the string $e$ using calling convention $c$.  The precise form
 of $e$ depends on the calling convention and is detailed in
-@sec:extent[Section]
+@sec:extent.
 If a variable $v$ is defined by an import
 declaration, no other top-level declaration for $v$ is allowed in the same
 module.  For example, the declaration
@@ -300,7 +299,7 @@ module.  For example, the declaration
 foreign import ccall "string.h strlen"
    cstrlen :: Ptr CChar -> IO CSize
 ```
-introduces the function \mbox{\tt cstrlen}, which invokes the external function
+introduces the function `cstrlen`, which invokes the external function
 `strlen` using the standard C calling convention.  Some external entities
 can be imported as pure functions; for example,
 ```haskell
@@ -312,7 +311,7 @@ when applied to the same argument values, it always produces the same result.
 
 Whether a particular form of external entity places a constraint on the
 Haskell type with which it can be imported is defined in
-@sec:extent[Section]
+@sec:extent.
 Although, some forms of external entities restrict
 the set of Haskell types that are permissible, the system can generally not
 guarantee the consistency between the Haskell type given in an import
@@ -328,7 +327,7 @@ into the Haskell system.  If it does, the system behaviour is undefined.  The
 default for an invocation is to be `safe`.  Note that a callback into
 the Haskell system implies that a garbage collection might be triggered after
 an external entity was called, but before this call returns.  Consequently,
-objects other than stable pointers (cf.\ Section~\ref{module:Foreign.StablePtr}) may be
+objects other than stable pointers (cf. the module `Foreign.StablePtr` from the standard library) may be
 moved or garbage collected by the storage manager.
 
 === Export Declarations
@@ -367,18 +366,18 @@ clearly, the syntax of the specification of an external entity depends on the
 calling convention and may be non-trivial.
 
 Consequently, the FFI does not fix a general syntax for denoting external
-entities, but requires both $italic("impent")$ and $italic("expent")$ to take the
-form of a Haskell $italic("string")$ literal.  The formation rules for the values
+entities, but requires both $nonterminal("impent")$ and $nonterminal("expent")$ to take the
+form of a Haskell $nonterminal("string")$ literal.  The formation rules for the values
 of these strings depend on the calling convention and a Haskell system
 implementing a particular calling convention will have to parse these strings
 in accordance with the calling convention.
 
-Defining $italic("impent")$ and $italic("expent")$ to take the form of a
-$italic("string")$ implies that all information that is needed to statically
+Defining $nonterminal("impent")$ and $nonterminal("expent")$ to take the form of a
+$nonterminal("string")$ implies that all information that is needed to statically
 analyse the Haskell program is separated from the information needed to
 generate the code interacting with the foreign language.  This is, in
 particular, helpful for tools processing Haskell source code.  When ignoring
-the entity information provided by $italic("impent")$ or $italic("expent")$, foreign
+the entity information provided by $nonterminal("impent")$ or $nonterminal("expent")$, foreign
 import and export declarations are still sufficient to infer identifier
 definition and use information as well as type information.
 
@@ -411,19 +410,19 @@ domain of language-specific tools, which provide added convenience over the plai
 For import declarations, the syntax for the specification of external entities
 under the `ccall` calling convention is as follows:
 $
-  italic("impent") &-> mono("\"") [mono("static")] [italic("chname")] [mono("&")] [italic("cid")] mono("\"") &text("(static function or address)")\
-  &| mono("\"") italic("dynamic") mono("\"") &text("(stub factory importing addresses)") \
-  &| mono("\"") italic("wrapper") mono("\"") &text("(stub factory exporting thunks)")
+  nonterminal("impent") &-> mono("\"") [mono("static")] [nonterminal("chname")] [mono("&")] [nonterminal("cid")] mono("\"") &text("(static function or address)")\
+  &| mono("\"dynamic\"") &text("(stub factory importing addresses)") \
+  &| mono("\"wrapper\"") &text("(stub factory exporting thunks)")
 $
-The first alternative either imports a static function $italic("cid")$ or, if
-`&` precedes the identifier, a static address.  If $italic("cid")$ is
+The first alternative either imports a static function $nonterminal("cid")$ or, if
+`&` precedes the identifier, a static address.  If $nonterminal("cid")$ is
 omitted, it defaults to the name of the imported Haskell variable.  The
-optional filename $italic("chname")$ specifies a C header file, where the
+optional filename $nonterminal("chname")$ specifies a C header file, where the
 intended meaning is that the header file declares the C entity identified by
-$italic("cid")$.  In particular, when the Haskell system compiles Haskell to C
+$nonterminal("cid")$.  In particular, when the Haskell system compiles Haskell to C
 code, the directive
 $
-  mono("#include") mono("\"") italic("chname") mono("\"")
+  mono("#include") mono("\"") nonterminal("chname") mono("\"")
 $
 needs to be placed into any generated C file that refers to the foreign entity
 before the first occurrence of that entity in the generated C file.
@@ -452,16 +451,15 @@ C variable `bar` of integer type,
 foreign import ccall "&" bar :: Ptr CInt
 ```
 must be used to obtain a pointer referring to the variable.  The variable can
-be read and updated using the routines provided by the module `Foreign.Storable`
-(cf.\ Section~\ref{module:Foreign.Storable}).
+be read and updated using the routines provided by the module `Foreign.Storable` from the standard library.
 
 *Export Declarations*
-External entities in $italic("ccall")$ export declarations are of the form
+External entities in `ccall` export declarations are of the form
 $
-  italic("expent") &-> mono("\"") italic("cid") mono("\"")
+  nonterminal("expent") &-> mono("\"") nonterminal("cid") mono("\"")
 $
 
-The optional C identifier $italic("cid")$ defines the external name by which the
+The optional C identifier $nonterminal("cid")$ defines the external name by which the
 exported Haskell variable is accessible in C.  If it is omitted, the external
 name defaults to the name of the exported Haskell variable.
 
@@ -495,8 +493,8 @@ foreign import ccall "errno.h &errno" errno :: Ptr CInt
   ```
   It imports the address of the variable `errno`, which is of the C type `int`.
 
-/ Dynamic import:  The type of a $italic("dynamic")$ stub has to be of the
-  form $(mono("FunPtr") italic("ft")) -> italic("ft")$,  where $italic("ft")$ may
+/ Dynamic import:  The type of a `dynamic` stub has to be of the
+  form $(mono("FunPtr") varname("ft")) -> varname("ft")$,  where $varname("ft")$ may
   be any foreign type.
 
   As an example, consider
@@ -508,9 +506,9 @@ foreign import ccall "dynamic"
   an integer value as its only argument and does not have a return value into
   a corresponding Haskell function.
 
-/ Dynamic wrapper:  The type of a $italic("wrapper")$ stub has to be of the
-  form $italic("ft") -> mono("IO (FunPtr") italic("ft") mono(")")$, where
-  $italic("ft")$ may be any foreign type.
+/ Dynamic wrapper:  The type of a `wrapper` stub has to be of the
+  form $varname("ft") -> mono("IO (FunPtr") varname("ft") mono(")")$, where
+  $varname("ft")$ may be any foreign type.
 
   As an example, consider
   ```haskell
@@ -524,12 +522,12 @@ foreign import ccall "wrapper"
 
 *Specification of Header Files*
 A C header specified in an import declaration is always included by
-$mono("#include \"") italic("chname") mono("\"")$.  There is no explicit support for
-$mono("#include <") italic("chname") mono(">")$ style inclusion.
+$mono("#include \"") nonterminal("chname") mono("\"")$.  There is no explicit support for
+$mono("#include <") nonterminal("chname") mono(">")$ style inclusion.
 The ISO C99~@C99 standard guarantees that any search path that would be used for a
-$mono("#include <") italic("chname") mono(">")$ is also used for $mono("#include \"") italic("chname") mono("\"")$ and it is guaranteed that these paths are searched after
-all paths that are unique to $mono("#include \"") italic("chname") mono("\"")$.  Furthermore,
-we require that $italic("chname")$ ends in `.h` to make parsing of the
+$mono("#include <") nonterminal("chname") mono(">")$ is also used for $mono("#include \"") nonterminal("chname") mono("\"")$ and it is guaranteed that these paths are searched after
+all paths that are unique to $mono("#include \"") nonterminal("chname") mono("\"")$.  Furthermore,
+we require that $nonterminal("chname")$ ends in `.h` to make parsing of the
 specification of external entities unambiguous.
   
 The specification of include files has been kept to a minimum on purpose.
@@ -631,9 +629,9 @@ good reasons for doing the marshalling in Haskell:
 Consequently, the Haskell FFI emphasises Haskell-side marshalling.
 
 The interface to the marshalling libraries is provided by the module
-`Foreign` (Chapter~\ref{module:Foreign}) plus a language-dependent module per supported language.  In
+`Foreign` from the standard library plus a language-dependent module per supported language.  In
 particular, the standard requires the availability of the module
-`Foreign.C` (Chapter~\ref{module:Foreign.C}), which simplifies portable interfacing with external C code.
+`Foreign.C`, which simplifies portable interfacing with external C code.
 Language-dependent modules, such as `Foreign.C`, generally provide Haskell
 types representing the basic types of the foreign language using a
 representation that is compatible with the foreign types as implemented by the
@@ -791,7 +789,7 @@ be called with `NULL` for both `argc` and `argv`, signalling
 the absence of command line arguments.
 
 The function `hs_set_argv()` sets the values returned by the functions
-`getProgName` and `getArgs` of the module `System.Environment` (Section~\ref{module:System.Environment}).  This function may only be invoked after
+`getProgName` and `getArgs` of the module `System.Environment`. This function may only be invoked after
 `hs_init()`.  Moreover, if `hs_set_argv()` is called at all, this
 call must precede the first invocation of `getProgName` and
 `getArgs`.  Note that the separation of `hs_init()` and
