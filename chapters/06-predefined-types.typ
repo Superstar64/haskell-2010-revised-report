@@ -189,6 +189,13 @@ The standard classes include the hierarchy of numeric classes (@fig:numeric-clas
 the Functor--Monad hierarchy (@fig:functor-monad-classes),
 and miscellaneous classes `Show`, `Read` (@subsec:read-show) and `Bounded` (@subsec:bounded).
 
+// These figures are built externally. They derived from graphviz `.dot` files
+// then are further processed by a simple Python script.
+
+// When running in Typst's watch mode, these need to be rebuilt by hand to see
+// updates.
+
+// See the Makefile and `images/` for implementation details.
 
 #figure(
   caption: "Numeric Haskell Classes",
